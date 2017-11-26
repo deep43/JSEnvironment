@@ -9,12 +9,12 @@
     # Get the latest stable version of Node.js or io.js
     -ps: Install-Product node $env:nodejs_version
     # install modules
-    - npm install
+    -npm install
 
   # Post install test scripts
   test_scripts:
     # output usefull version for debugging.
-    - node --version
+    -node --version
     - npm --version
 
     # Run test
