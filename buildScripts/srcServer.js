@@ -19,9 +19,16 @@ app.use(webpackDevMiddleWare(compiler, {
     publicPath: config.output.publicPath
 }));
 
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../src/index.html'));
+});
+
+app.get('/users', (req, res) => {
+    res.json([
+        {"name": "Deep", "title":"Hazra"},
+        {"name": "Rahul", "title":"Hazra"},
+        {"name": "Purnima", "title":"Hazra"}
+    ]);
 });
 
 app.listen(port, (err) => {
