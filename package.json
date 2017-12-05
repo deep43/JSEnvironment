@@ -14,8 +14,12 @@
     "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
     "generate-mock-data": "babel-node buildScripts/generateMockData.js",
-    "pre-start-mock-api": "npm run generate-mock-data",
-    "start-mock-api": "json-server --watch src/api/db.json --port 3300"
+    "prestart-mock-api": "npm run generate-mock-data",
+    "start-mock-api": "json-server --watch src/api/db.json --port 3300",
+    "clean-dist": "rimraf ./dist && mkdir dist",
+    "prebuild": "npm-run-all clean-dist test lint",
+    "build":"babel-node buildScripts/build.js",
+    "postbuild":"babel-node buildScripts/distServer.js"
   },
   "author": "Deep Hazra",
   "license": "MIT",

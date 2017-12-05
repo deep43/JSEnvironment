@@ -4,26 +4,20 @@
 import express from  'express';
 import path from 'path';
 import open from 'open';
-import webpack from 'webpack';
-import webpackDevMiddleWare from 'webpack-dev-middleware';
-import config from '../webpack.config.dev';
+import compression from 'compression';
 
 /*eslint-disable no-console*/
 
 const port = 3200;
 const app = express();
-const compiler = webpack(config);
 
-app.use(webpackDevMiddleWare(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-}));
+app.use(compression());
+app.use(express.static('dist'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../src/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-/*
 app.get('/users', (req, res) => {
     res.json([
         {"name": "Deep", "title":"Hazra"},
@@ -31,7 +25,6 @@ app.get('/users', (req, res) => {
         {"name": "Purnima", "title":"Hazra"}
     ]);
 });
-*/
 
 app.listen(port, (err) => {
     if (err) {

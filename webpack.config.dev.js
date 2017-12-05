@@ -2,6 +2,7 @@
  * Created by dhazra on 11/26/2017.
  */
 import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
     debug: true,
@@ -16,7 +17,13 @@ export default {
         publicPath: '/',
         filename: 'bundle.js'
     },
-    plugins: [],
+    plugins: [
+        // Creates html file that includes reference to the bundle.js
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            inject: true
+        })
+    ],
     module: {
         loaders: [
             {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
